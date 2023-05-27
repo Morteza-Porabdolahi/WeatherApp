@@ -4,3 +4,4 @@
 node_modules
 dist
 .cache
+js/utils/api.js
