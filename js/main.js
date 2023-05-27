@@ -47,7 +47,11 @@ function handleUserLocation() {
 }
 
 function fetchWeatherData(query = "") {
-	fetch(`${API_URL}/forecast.json?key=${API_KEY}&q=${query}&days=10`)
+	fetch(`${API_URL}/forecast.json?key=${API_KEY}&q=${query}&days=10`, {
+		headers: {
+			"Content-Type": "application/json"
+		}
+	})
 		.then(response => response.json())
 		.then(data => {
 			// c is the acronym of celsius
