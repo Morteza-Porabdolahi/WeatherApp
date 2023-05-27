@@ -4,5 +4,4 @@
 node_modules
 dist
 .cache
-api.js
-.gitignore
+js/utils/api.js
