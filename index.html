@@ -32,9 +32,12 @@
             <div class="search-container__search-input-wrapper flex jc-space-between">
               <input type="text" placeholder="City or ZIP Code" id="search" class="search-input-wrapper__search-input"
                 autocomplete="off">
-              <label for="search" class="search-input-wrapper__search-label">
+              <label for="search" class="search-input-wrapper__search-label" id="searchLabel">
                 <i class="fas fa-search"></i>
               </label>
+              <button class="search-input-wrapper__grant-perm" id="grantPerm">
+                <i class="fas fa-map-marker-alt"></i>
+              </button>
             </div>
           </div>
         </div>
@@ -42,202 +45,41 @@
       <main class="main">
         <div class="main__main-container">
           <div class="main-container__weather-descs text-center">
-            <p class="weather-descs__city-name">London, United Kingdom</p>
+            <p class="weather-descs__city-name" id="locationName">---</p>
             <div class="weather-descs__temp-container flex jc-center align-center">
               <div class="temp-contanier__temp flex">
-                <h2 class="temp">64</h2>&#176;
+                <h2 class="temp" id="temp">-</h2>&#176;
               </div>
               <div class="temp-container__temp-units flex flex-direction-column">
-                <span class="temp-units__fah deactive-text">F</span>
-                <span class="temp-units__cen">C</span>
+                <span class="temp-units temp-units__fah" data-temp="f">F</span>
+                <span class="temp-units temp-units__cen active-text" data-temp="c">C</span>
               </div>
             </div>
-            <p class="weather-descs__weather-state">Clear</p>
+            <p class="weather-descs__weather-state" id="weatherCond">--</p>
             <div class="weather-descs__other-descs">
               <div class="other-descs__other-descs-row flex jc-center">
                 <span class="other-descs-row__real-feel">
-                  Feels Like <span class="real-feel__real-feel-temp">64</span> &#176;
+                  Feels Like <span class="real-feel__real-feel-temp" id="realFeel">-</span> &#176;
                 </span>
                 <span class="other-descs-row__wind">
-                  Wind <i class="fas fa-location-arrow"></i> <span class="wind__wind-speed">5</span> mph
+                  Wind <i class="fas fa-location-arrow"></i> <span class="wind__wind-speed" id="windSpeed">-</span> mph
                 </span>
-                <span class="other-descs-row__wind">
-                  Visibility <span class="wind__wind-speed">6</span> mi
+                <span class="other-descs-row__visability">
+                  Visability <span id="visability">-</span> mi
                 </span>
               </div>
               <div class="other-descs__other-descs-row flex jc-center">
-                <span class="other-descs-row__real-feel">
-                  Humidity <span class="real-feel__real-feel-temp">68</span> %
+                <span class="other-descs-row__humidity">
+                  Humidity <span id="humidity">-</span>%
                 </span>
-                <span class="other-descs-row__wind">
-                  Pressure <span class="wind__wind-speed">30</span> in
+                <span class="other-descs-row__pressure">
+                  Pressure <span id="pressure">-</span>in
                 </span>
               </div>
             </div>
           </div>
           <div class="main-container__weather-forecasts">
-            <div class="weather-forecasts__weather-forecasts-wrapper flex">
-              <div class="weather-forecasts-wrapper__forecast active">
-                <p class="forecast__date">Tue 30</p>
-                <img src="https://cdn.weatherapi.com/weather/64x64/night/116.png" class="forecast__img"
-                  alt="Weather Icon">
-                <div class="forecast__temps flex">
-                  <div class="temps__max-temp">
-                    <span class="max-temp">81</span>&#176;
-                  </div>
-                  <div class="temps__min-temp deactive-text">
-                    <span class="min-temp">69</span>&#176;
-                  </div>
-                </div>
-                <p class="forecast__weather-condition">
-                  Sunny
-                </p>
-              </div>
-              <div class="weather-forecasts-wrapper__forecast">
-                <p class="forecast__date">Tue 30</p>
-                <img src="https://cdn.weatherapi.com/weather/64x64/night/116.png" class="forecast__img"
-                  alt="Weather Icon">
-                <div class="forecast__temps flex">
-                  <div class="temps__max-temp">
-                    <span class="max-temp">81</span>&#176;
-                  </div>
-                  <div class="temps__min-temp deactive-text">
-                    <span class="min-temp">69</span>&#176;
-                  </div>
-                </div>
-                <p class="forecast__weather-condition">
-                  Sunny
-                </p>
-              </div>
-              <div class="weather-forecasts-wrapper__forecast">
-                <p class="forecast__date">Tue 30</p>
-                <img src="https://cdn.weatherapi.com/weather/64x64/night/116.png" class="forecast__img"
-                  alt="Weather Icon">
-                <div class="forecast__temps flex">
-                  <div class="temps__max-temp">
-                    <span class="max-temp">81</span>&#176;
-                  </div>
-                  <div class="temps__min-temp deactive-text">
-                    <span class="min-temp">69</span>&#176;
-                  </div>
-                </div>
-                <p class="forecast__weather-condition">
-                  Sunny
-                </p>
-              </div>
-              <div class="weather-forecasts-wrapper__forecast">
-                <p class="forecast__date">Tue 30</p>
-                <img src="https://cdn.weatherapi.com/weather/64x64/night/116.png" class="forecast__img"
-                  alt="Weather Icon">
-                <div class="forecast__temps flex">
-                  <div class="temps__max-temp">
-                    <span class="max-temp">81</span>&#176;
-                  </div>
-                  <div class="temps__min-temp deactive-text">
-                    <span class="min-temp">69</span>&#176;
-                  </div>
-                </div>
-                <p class="forecast__weather-condition">
-                  Sunny
-                </p>
-              </div>
-              <div class="weather-forecasts-wrapper__forecast">
-                <p class="forecast__date">Tue 30</p>
-                <img src="https://cdn.weatherapi.com/weather/64x64/night/116.png" class="forecast__img"
-                  alt="Weather Icon">
-                <div class="forecast__temps flex">
-                  <div class="temps__max-temp">
-                    <span class="max-temp">81</span>&#176;
-                  </div>
-                  <div class="temps__min-temp deactive-text">
-                    <span class="min-temp">69</span>&#176;
-                  </div>
-                </div>
-                <p class="forecast__weather-condition">
-                  Sunny
-                </p>
-              </div>
-              <div class="weather-forecasts-wrapper__forecast">
-                <p class="forecast__date">Tue 30</p>
-                <img src="https://cdn.weatherapi.com/weather/64x64/night/116.png" class="forecast__img"
-                  alt="Weather Icon">
-                <div class="forecast__temps flex">
-                  <div class="temps__max-temp">
-                    <span class="max-temp">81</span>&#176;
-                  </div>
-                  <div class="temps__min-temp deactive-text">
-                    <span class="min-temp">69</span>&#176;
-                  </div>
-                </div>
-                <p class="forecast__weather-condition">
-                  Sunny
-                </p>
-              </div>
-              <div class="weather-forecasts-wrapper__forecast">
-                <p class="forecast__date">Tue 30</p>
-                <img src="https://cdn.weatherapi.com/weather/64x64/night/116.png" class="forecast__img"
-                  alt="Weather Icon">
-                <div class="forecast__temps flex">
-                  <div class="temps__max-temp">
-                    <span class="max-temp">81</span>&#176;
-                  </div>
-                  <div class="temps__min-temp deactive-text">
-                    <span class="min-temp">69</span>&#176;
-                  </div>
-                </div>
-                <p class="forecast__weather-condition">
-                  Sunny
-                </p>
-              </div>
-              <div class="weather-forecasts-wrapper__forecast">
-                <p class="forecast__date">Tue 30</p>
-                <img src="https://cdn.weatherapi.com/weather/64x64/night/116.png" class="forecast__img"
-                  alt="Weather Icon">
-                <div class="forecast__temps flex">
-                  <div class="temps__max-temp">
-                    <span class="max-temp">81</span>&#176;
-                  </div>
-                  <div class="temps__min-temp deactive-text">
-                    <span class="min-temp">69</span>&#176;
-                  </div>
-                </div>
-                <p class="forecast__weather-condition">
-                  Sunny
-                </p>
-              </div>
-              <div class="weather-forecasts-wrapper__forecast">
-                <p class="forecast__date">Tue 30</p>
-                <img src="https://cdn.weatherapi.com/weather/64x64/night/116.png" class="forecast__img"
-                  alt="Weather Icon">
-                <div class="forecast__temps flex">
-                  <div class="temps__max-temp">
-                    <span class="max-temp">81</span>&#176;
-                  </div>
-                  <div class="temps__min-temp deactive-text">
-                    <span class="min-temp">69</span>&#176;
-                  </div>
-                </div>
-                <p class="forecast__weather-condition">
-                  Sunny
-                </p>
-              </div>
-              <div class="weather-forecasts-wrapper__forecast">
-                <p class="forecast__date">Tue 30</p>
-                <img src="https://cdn.weatherapi.com/weather/64x64/night/116.png" class="forecast__img"
-                  alt="Weather Icon">
-                <div class="forecast__temps flex">
-                  <div class="temps__max-temp">
-                    <span class="max-temp">81</span>&#176;
-                  </div>
-                  <div class="temps__min-temp deactive-text">
-                    <span class="min-temp">69</span>&#176;
-                  </div>
-                </div>
-                <p class="forecast__weather-condition">
-                  Sunny
-                </p>
-              </div>
-
+            <div class="weather-forecasts__weather-forecasts-wrapper flex" id="forecasts">
             </div>
           </div>
           <div class="main-container__weather-hourly">
@@ -245,7 +87,7 @@
               Hourly
             </h3>
             <div class="weather-hourly__hourly-chart">
-              <canvas id="hourly-chart" height="80"></canvas>
+              <canvas id="hourly-chart"></canvas>
             </div>
 
           </div>

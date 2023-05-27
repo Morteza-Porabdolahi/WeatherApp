@@ -319,6 +319,7 @@ body {
   top: 0;
   right: 0;
   left: 0;
+  z-index: 2;
 }
 
 .navbar__navbar-item {
@@ -335,9 +336,17 @@ body {
   background-color: transparent;
   outline: 0;
   color: var(--color-white);
+  flex-basis: 80%;
 }
 
-.search-input-wrapper__search-label {
+.search-input-wrapper__grant-perm {
+  border: 0;
+  background-color: transparent;
+  color: var(--color-white);
+}
+
+.search-input-wrapper__search-label,
+.search-input-wrapper__grant-perm {
   cursor: pointer;
 }
 
@@ -364,7 +373,7 @@ button {
 }
 
 .main__main-container {
-  padding: 1.5rem 3.5rem;
+  padding: 1.5rem 2.5rem;
 }
 
 .temp-container__temp-units {
@@ -375,8 +384,13 @@ button {
   cursor: pointer;
 }
 
-.deactive-text {
+.temp-units,
+.temps__min-temp {
   color: var(--color-gray-100);
+}
+
+.active-text {
+  color: var(--color-white);
 }
 
 .weather-descs__weather-state {
@@ -409,15 +423,17 @@ button {
 
 .weather-forecasts-wrapper__forecast {
   position: relative;
-  padding: .3rem 3.5rem 1.7rem .5rem;
+  padding: .3rem 0 1.7rem .5rem;
   border-radius: .2rem;
   cursor: pointer;
+  width: calc(100% / 10);
 }
 
 .weather-forecasts__weather-forecasts-wrapper {
   gap: .5rem;
   margin: 2rem 0;
 }
+
 
 .forecast__date,
 .temps__min-temp {
@@ -445,4 +461,10 @@ button {
 .weather-hourly__title {
   padding-bottom: .5rem;
   border-bottom: 1px solid var(--color-gray-100);
+  margin-bottom: 1.5rem;
+}
+
+
+.weather-hourly__hourly-chart {
+  width: 100%;
 }
