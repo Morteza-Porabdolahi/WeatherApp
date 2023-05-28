@@ -1,6 +1,5 @@
 import { $ } from "./utils/general.js";
 import { API_KEY, API_URL } from "./utils/api.js";
-import AOS from "./vendor/aos.js";
 
 (function() {
 	AOS.init({
