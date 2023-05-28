@@ -384,7 +384,7 @@ button {
   cursor: pointer;
 }
 
-.temp-units,
+.temp-unit,
 .temps__min-temp {
   color: var(--color-gray-100);
 }

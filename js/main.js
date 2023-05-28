@@ -20,7 +20,7 @@ Date.prototype.yyyymmdd = function() {
 };
 
 const locationGrantBtn = $.getElementById("grantPerm"),
-	tempUnits = $.querySelectorAll(".temp-units"),
+	tempUnits = $.querySelectorAll(".temp-unit"),
 	searchInputLabel = $.getElementById("searchLabel"),
 	searchInput = $.getElementById("search");
 let weatherChart = null;
@@ -63,17 +63,21 @@ function fetchWeatherData(query = "") {
 		.then(data => {
 			// c is the acronym of celsius
 			insertWeaherDataIntoDom(data, "c");
-
-			tempUnits.forEach(element => {
-				element.addEventListener("click", () => {
-					// remove "active-text" from both
-					tempUnits.forEach(elem => elem.classList.remove("active-text"));
-					element.classList.add("active-text");
-					insertWeaherDataIntoDom(data, element.dataset.temp);
-				});
-			});
+			handleTempUnitBtns(tempUnits, data);
 		})
 		.catch(console.log);
+}
+
+function handleTempUnitBtns(tempUnitsBtn, data) {
+	tempUnitsBtn.forEach(element => {
+		element.addEventListener("click", () => {
+			// remove "active-text" class from active element
+			$.querySelector(".temp-unit.active-text").classList.remove("active-text");
+			element.classList.add("active-text");
+
+			insertWeaherDataIntoDom(data, element.dataset.temp);
+		});
+	});
 }
 
 function insertWeaherDataIntoDom(data, tempUnit) {
@@ -115,8 +119,8 @@ function createForecastElements(forecasts = [], tempUnit = "") {
 
 	function handleForecastElementClasses(clickedForecastElem) {
 		forecastsContainer
-			.querySelectorAll(".weather-forecasts-wrapper__forecast")
-			.forEach(element => element.classList.remove("active"));
+			.querySelector(".weather-forecasts-wrapper__forecast.active")
+			.classList.remove("active");
 		clickedForecastElem.classList.add("active");
 	}
 
