@@ -466,5 +466,10 @@ button {
 
 
 .weather-hourly__hourly-chart {
-  width: 100%;
+  min-height: 25rem;
+}
+
+.main-container__weather-hourly {
+  max-width: 50rem;
+  margin: 0 auto;
 }

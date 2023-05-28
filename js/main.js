@@ -1,5 +1,12 @@
 import { $ } from "./utils/general.js";
 import { API_KEY, API_URL } from "./utils/api.js";
+import AOS from "./vendor/aos.js";
+
+(function() {
+	AOS.init({
+		disable: "mobile"
+	});
+})();
 
 Date.prototype.yyyymmdd = function() {
 	let month = this.getMonth() + 1; // getMonth() is zero-based
@@ -125,6 +132,7 @@ function createForecastElements(forecasts = [], tempUnit = "") {
 		new Date().getDate()
 			? "active"
 			: ""}`;
+		weatherForecastElem.dataset.aos = "fade-up";
 		weatherForecastElem.innerHTML = `
 		<p class="forecast__date">${forecastDate[0]} ${forecastDate[2]}</p>
 		<img src="${dailyForecast.condition
