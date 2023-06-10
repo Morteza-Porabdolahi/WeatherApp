@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/all.min.css">
+  <link rel="stylesheet" href="css/responsive.css">
   <meta name="theme-color" content="#fafafa">
 </head>
 
@@ -23,20 +24,21 @@
             <ul class="navbar-container__navbar">
               <li class="navbar__navbar-item">
                 <i class="fas fa-arrow-left"></i>
-                <span>Forecast</span>
               </li>
             </ul>
           </div>
           <div class="search-container">
             <div class="search-container__search-input-wrapper flex jc-space-between">
-              <input type="text" placeholder="City or ZIP Code" id="search" class="search-input-wrapper__search-input"
-                autocomplete="off">
-              <label for="search" class="search-input-wrapper__search-label" id="searchLabel">
-                <i class="fas fa-search"></i>
-              </label>
-              <button class="search-input-wrapper__grant-perm" id="grantPerm">
-                <i class="fas fa-map-marker-alt"></i>
-              </button>
+              <input type="text" placeholder="City or ZIP Code" id="search"
+                class="search-input-wrapper__search-input h6" autocomplete="off">
+              <div class="search-input-wrapper__btns flex jc-space-between">
+                <label for="search" class="btns__search-label h6" id="searchLabel">
+                  <i class="fas fa-search"></i>
+                </label>
+                <button class="btns__grant-perm h6" id="grantPerm">
+                  <i class="fas fa-map-marker-alt"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -44,30 +46,31 @@
       <main class="main">
         <div class="main__main-container">
           <div class="main-container__weather-descs text-center">
-            <p class="weather-descs__city-name" id="locationName">---</p>
+            <p class="weather-descs__city-name h2" id="locationName">---</p>
             <div class="weather-descs__temp-container flex jc-center align-center">
-              <div class="temp-contanier__temp flex">
-                <h2 class="temp" id="temp">-</h2>&#176;
+              <div class="temp-contanier__temp flex h1">
+                <h1 class="temp" id="temp">-</h1>&#176;
               </div>
-              <div class="temp-container__temp-units flex flex-direction-column">
+              <div class="temp-container__temp-units flex flex-direction-column h5">
                 <span class="temp-unit temp-units__fah" data-temp="f">F</span>
                 <span class="temp-unit temp-units__cen active-text" data-temp="c">C</span>
               </div>
             </div>
-            <p class="weather-descs__weather-state" id="weatherCond">--</p>
+            <p class="weather-descs__weather-state h4" id="weatherCond">--</p>
             <div class="weather-descs__other-descs">
-              <div class="other-descs__other-descs-row flex jc-center">
+              <div class="other-descs__other-descs-row flex jc-center h6">
                 <span class="other-descs-row__real-feel">
                   Feels Like <span class="real-feel__real-feel-temp" id="realFeel">-</span> &#176;
                 </span>
                 <span class="other-descs-row__wind">
-                  Wind <i class="fas fa-location-arrow"></i> <span class="wind__wind-speed" id="windSpeed">-</span> mph
+                  Wind <i class="fas fa-location-arrow"></i> <span class="wind__wind-speed" id="windSpeed">-</span>
+                  mph
                 </span>
                 <span class="other-descs-row__visability">
                   Visability <span id="visability">-</span> mi
                 </span>
               </div>
-              <div class="other-descs__other-descs-row flex jc-center">
+              <div class="other-descs__other-descs-row flex jc-center h6">
                 <span class="other-descs-row__humidity">
                   Humidity <span id="humidity">-</span>%
                 </span>
@@ -82,9 +85,9 @@
             </div>
           </div>
           <div class="main-container__weather-hourly">
-            <h3 class="weather-hourly__title">
+            <h5 class="weather-hourly__title">
               Hourly
-            </h3>
+            </h5>
             <div class="weather-hourly__hourly-chart">
               <canvas id="hourly-chart"></canvas>
             </div>
@@ -96,7 +99,6 @@
     </section>
   </section>
 
-  <script src="js/vendor/aos.js"></script>
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.umd.js"
     integrity="sha512-CMF3tQtjOoOJoOKlsS7/2loJlkyctwzSoDK/S40iAB+MqWSaf50uObGQSk5Ny/gfRhRCjNLvoxuCvdnERU4WGg=="

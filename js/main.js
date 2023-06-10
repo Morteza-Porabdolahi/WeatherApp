@@ -1,9 +1,13 @@
-import { $ } from "./utils/general.js";
+import { $, myFetch } from "./utils/general.js";
 import { API_KEY, API_URL } from "./utils/api.js";
+import AOS from "./vendor/aos.js";
+import SunCalc from "../node_modules/suncalc/suncalc.js";
 
+console.log(SunCalc);
 (function() {
 	AOS.init({
-		disable: "mobile"
+		disable: window.innerWidth < 768,
+		once: true
 	});
 })();
 
@@ -52,19 +56,38 @@ function handleUserLocation() {
 	);
 }
 
-function fetchWeatherData(query = "") {
-	fetch(`${API_URL}/forecast.json?key=${API_KEY}&q=${query}&days=10`, {
-		headers: {
-			"Content-Type": "application/json"
-		}
-	})
-		.then(response => response.json())
-		.then(data => {
-			// c is the acronym of celsius
-			insertWeaherDataIntoDom(data, "c");
-			handleTempUnitBtns(tempUnits, data);
-		})
-		.catch(console.log);
+async function fetchWeatherData(query = "") {
+	try {
+		const weatherDatas = await myFetch(
+			`${API_URL}/forecast.json?key=${API_KEY}&q=${query}&days=3`,
+			{
+				headers: {
+					"Content-Type": "application/json"
+				}
+			}
+		);
+		const { location: { lat, lon, localtime } } = weatherDatas;
+		changeTheBodyBackground(localtime, lat, lon);
+		// c is the acronym of celsius
+		insertWeaherDataIntoDom(weatherDatas, "c");
+		handleTempUnitBtns(tempUnits, weatherDatas);
+	} catch (e) {
+		if (e) console.log(e);
+	}
+}
+
+function changeTheBodyBackground(localtime, lat, lon) {
+	const times = SunCalc.getTimes(new Date(), lat, lon);
+	const currentHour = new Date(localtime).getHours();
+	const sunRiseHour = times.sunrise.getHours();
+	const nightStartHour = times.nadir.getHours();
+
+	console.log(times, sunRiseHour, nightStartHour, currentHour);
+	if (currentHour >= sunRiseHour && currentHour <= nightStartHour) {
+		document.body.backgroundImage = 'url("/img/sunny.jpg")';
+	} else {
+		document.body.backgroundImage = 'url("/img/night.jpg")';
+	}
 }
 
 function handleTempUnitBtns(tempUnitsBtn, data) {
@@ -79,30 +102,35 @@ function handleTempUnitBtns(tempUnitsBtn, data) {
 	});
 }
 
+// for reducing repeatance
+function roundingDown(value) {
+	return Math.floor(value);
+}
+
 function insertWeaherDataIntoDom(data, tempUnit) {
 	const { country, name } = data.location,
 		currentWeather = data.current,
 		forecasts = data.forecast.forecastday;
 
 	document.getElementById("locationName").textContent = `${name}, ${country}`;
-	document.getElementById("temp").textContent = Math.floor(
+	document.getElementById("temp").textContent = roundingDown(
 		currentWeather[`temp_${tempUnit}`]
 	);
 	document.getElementById("weatherCond").textContent =
 		currentWeather.condition.text;
-	document.getElementById("realFeel").textContent = Math.floor(
+	document.getElementById("realFeel").textContent = roundingDown(
 		currentWeather[`feelslike_${tempUnit}`]
 	);
-	document.getElementById("windSpeed").textContent = Math.floor(
+	document.getElementById("windSpeed").textContent = roundingDown(
 		currentWeather.wind_mph
 	);
-	document.getElementById("visability").textContent = Math.floor(
+	document.getElementById("visability").textContent = roundingDown(
 		currentWeather.vis_miles
 	);
-	document.getElementById("humidity").textContent = Math.floor(
+	document.getElementById("humidity").textContent = roundingDown(
 		currentWeather.humidity
 	);
-	document.getElementById("pressure").textContent = Math.floor(
+	document.getElementById("pressure").textContent = roundingDown(
 		currentWeather.pressure_in
 	);
 
@@ -137,22 +165,22 @@ function createForecastElements(forecasts = [], tempUnit = "") {
 			: ""}`;
 		weatherForecastElem.dataset.aos = "fade-up";
 		weatherForecastElem.innerHTML = `
-		<p class="forecast__date">${forecastDate[0]} ${forecastDate[2]}</p>
+		<p class="forecast__date h6">${forecastDate[0]} ${forecastDate[2]}</p>
 		<img src="${dailyForecast.condition
 			.icon}" class="forecast__img" alt="Weather Icon">
-		<div class="forecast__temps flex">
+		<div class="forecast__temps flex h6">
 			<div class="temps__max-temp">
-				<span class="max-temp">${Math.floor(
+				<span class="max-temp">${roundingDown(
 					dailyForecast[`maxtemp_${tempUnit}`]
 				)}</span>&#176;
 			</div>
 			<div class="temps__min-temp">
-				<span class="min-temp">${Math.floor(
+				<span class="min-temp">${roundingDown(
 					dailyForecast[`mintemp_${tempUnit}`]
 				)}</span>&#176;
 			</div>
 		</div>
-		<p class="forecast__weather-condition">${dailyForecast.condition.text}</p>
+		<p class="forecast__weather-condition h6">${dailyForecast.condition.text}</p>
 		`;
 
 		fragment.append(weatherForecastElem);
@@ -217,7 +245,7 @@ function drawHourlyTempChart(data = [], tempUnit = "") {
 					data: data.map(row => row.temp),
 					borderWidth: 2,
 					borderColor: "rgb(116, 116, 116)",
-					pointRadius: 3
+					pointRadius: window.innerWidth <= 436 ? 0 : 3
 				}
 			]
 		},
